@@ -46,21 +46,22 @@ MemoryCache.set = async (key, value, expires = DEFAULT_EXPIRES) => {
 };
 
 MemoryCache.get = async (key) => {
-
+    console.log('getting key - '+key);
     const k = PREFIX + key,
     curTime = currentTime();
 
     try {
         let v = await AsyncStorage.getItem(k);
-
+        console.log(v);
         v = v ? JSON.parse((Platform.OS == 'android') ?  b64DecodeUnicode(v) : v) : null;
-
+          
         if ( v && v.expires && v.expires >= curTime ) {
             return v.value;
         } else {
             await AsyncStorage.removeItem(k);
         }
     } catch ( err ) {
+         console.log(err);
         return {error: err};
     }
 
