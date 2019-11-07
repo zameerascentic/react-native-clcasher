@@ -51,7 +51,6 @@ MemoryCache.get = async (key) => {
 
     try {
         let v = await AsyncStorage.getItem(k);
-        console.log(v);
         v = v ? JSON.parse((Platform.OS == 'android') ?  b64DecodeUnicode(v) : v) : null;
           
         if ( v && v.expires && v.expires >= curTime ) {
