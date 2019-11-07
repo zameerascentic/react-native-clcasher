@@ -1,6 +1,6 @@
 // import React, {Component} from 'react';
 import {Platform} from 'react-native';
-import {AsyncStorage} from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
 
 const PREFIX = 'react-native-cacher:values:';
 const DEFAULT_EXPIRES = 999999;
@@ -46,7 +46,6 @@ MemoryCache.set = async (key, value, expires = DEFAULT_EXPIRES) => {
 };
 
 MemoryCache.get = async (key) => {
-    console.log('getting key - '+key);
     const k = PREFIX + key,
     curTime = currentTime();
 
@@ -61,7 +60,6 @@ MemoryCache.get = async (key) => {
             await AsyncStorage.removeItem(k);
         }
     } catch ( err ) {
-         console.log(err);
         return {error: err};
     }
 
